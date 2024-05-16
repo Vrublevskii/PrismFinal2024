@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="TestProjectPrism.DialogModule.Views.AddEditDepartment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen"/>
+            <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="ShowInTaskbar" Value="True"/>
+            <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <Grid MinWidth="300" Width="auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>                
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Отдел:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5"
+        Text="{Binding Department.NameDepartment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+            <Button Content="{Binding OkButtinContent}" Command="{Binding CloseCommand}" CommandParameter="true" IsDefault="True"
+            Margin="5"/>
+            <Button Content="Отмена" Command="{Binding CloseCommand}" CommandParameter="false" IsCancel="True"
+            Margin="5"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="ModuleUI.Views.ControlsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5">
+            <ComboBox x:Name="ComboBoxSearch" ItemsSource="{Binding ComboBoxKeys}" VerticalAlignment="Center" FontSize="20" Width="250" Margin="0,0,5,0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SendSelectedComboBox}"
+                           CommandParameter="{Binding ElementName=ComboBoxSearch, Path=SelectedValue}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <TextBox x:Name="SearchString" MinWidth="200" MaxHeight="32.6" VerticalContentAlignment="Center" />
+            <Button Content=" Search "  MaxHeight="32.6" Command="{Binding FilterCommand}" CommandParameter="{Binding ElementName=SearchString, Path=Text}" Margin="5,0,5,0"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5" >
+            <Button Content=" Add "  MaxHeight="32.6" Command="{Binding AddCommand}" Margin="0,0,5,0"/>
+            <Button Content=" Edit "  MaxHeight="32.6" Command="{Binding ChangeCommand}" Margin="0,0,5,0"/>
+            <Button Content=" Delete "  MaxHeight="32.6" Command="{Binding DeleteCommand}" Margin="0,0,5,0"/>
+            <Button Content=" Refresh "  MaxHeight="32.6" Command="{Binding ReloadCommand}"/>
+        </StackPanel>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding ReloadCommand}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+    </Grid>
+</UserControl>
